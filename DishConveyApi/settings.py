@@ -133,6 +133,15 @@ AUTH_USER_MODEL = 'users.UserAccount'
 
 DJOSER = {
     'SERIALIZERS': {
-        'user_create': 'users.serializers.UserCreateSerializer'
+        'user_create': 'users.serializers.UserCreateSerializer',
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
 }
