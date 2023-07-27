@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.conf import settings
 
 
 class UserAccountManager(BaseUserManager):
@@ -48,3 +49,4 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
+    
