@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'users',
-    
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +131,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.UserAccount'
 
+
 DJOSER = {
+    # 'SEND_ACTIVATION_EMAIL': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    # 'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    # 'ACTIVATION_URL': 'http://127.0.0.1:8000/activate/{uid}/{token}', #change to Frontend url
+    # 'PASSWORD_RESET_CONFIRM_URL': 'api/v1/accounts/password-reset/{uid}/{token}', #change to Frontend url
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserCreateSerializer',
     }
@@ -141,7 +149,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'COERCE_DECIMAL_TO_STRING': False,
 }
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
 }
+

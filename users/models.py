@@ -28,6 +28,7 @@ class UserAccountManager(BaseUserManager):
         user.is_admin = True
         user.is_staff =True
         user.is_superuser = True
+        user.is_active = True
         user.save()
         return user
 
@@ -48,3 +49,4 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
+    
