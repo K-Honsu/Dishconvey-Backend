@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+import uuid
 
 class Customer(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -26,5 +27,19 @@ class Product(models.Model):
     
     def __str__(self) -> str:
         return self.title
+    
+    
+class Cart(models.Model):
+    id = models.UUIDField(unique=True, default=uuid.uuid4, primary_key=True)
+    
+    
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField()
+    
+    class Meta:
+        unique_together = [['cart', 'product']]
+    
   
     

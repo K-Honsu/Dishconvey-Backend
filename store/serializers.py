@@ -17,6 +17,12 @@ class CollectionSerializer(serializers.ModelSerializer):
     product_count = serializers.IntegerField()
     
     class Meta:
-        
         model = Collection
         fields = ['id', 'title', 'product_count']
+        
+# cart serializers
+class CartSerializers(serializers.ModelSerializer):
+    id = serializers.UUIDField(read_only=True)
+    class Meta:
+        model = Cart
+        fields = ['id']
