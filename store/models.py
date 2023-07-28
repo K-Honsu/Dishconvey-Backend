@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.validators import MinValueValidator
 import uuid
 
 class Customer(models.Model):
@@ -32,14 +33,22 @@ class Product(models.Model):
 class Cart(models.Model):
     id = models.UUIDField(unique=True, default=uuid.uuid4, primary_key=True)
     
+    def __str__(self) -> str:
+        return f'Cart ID is {self.id}'
+    
     
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField()
+    quantity = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1)]
+    )
     
     class Meta:
         unique_together = [['cart', 'product']]
+        
+    def __str__(self) -> str:
+        return f'Cart belong to {self.cart.id}'
     
   
     
