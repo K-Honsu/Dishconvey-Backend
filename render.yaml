@@ -1,0 +1,11 @@
+name: DishConvey Api
+env:
+  - key: SECRET_KEY
+    value: config('SECRET_KEY')
+deploy:
+  - type: web
+    name: DishConvey-API
+    command: gunicorn DishConveyApi.wsgi:application --bind 0.0.0.0:$PORT
+
+    routes:
+      - path: /

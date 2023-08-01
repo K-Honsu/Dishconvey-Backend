@@ -10,7 +10,7 @@ class Customer(models.Model):
     address = models.CharField(max_length=1000)
     
     def __str__(self) -> str:
-        return f'{self.user} is a customer now'
+        return f'{self.user} is a customer'
 
 class Collection(models.Model):
     title = models.CharField(max_length=200) 
