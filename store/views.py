@@ -19,7 +19,6 @@ class CustomerViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, Ge
         if request.method == 'GET':
             serializer = CustomerSerializer(customer)
             return Response(serializer.data)
-            # return Response('ok')
         elif request.method == 'PUT':
             serializer = CustomerSerializer(customer, data=request.data)
             serializer.is_valid(raise_exception=True)
