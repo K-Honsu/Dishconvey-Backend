@@ -2,9 +2,10 @@ from .models import *
 from rest_framework import serializers
 
 class CustomerSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(read_only=True)
     class Meta:
         model = Customer
-        fields = ['id', 'phone_number','date_of_birth', 'address']
+        fields = ['id', 'user_id','phone_number','date_of_birth', 'address']
 
 
 
@@ -14,7 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'price', 'collection']
         
 class CollectionSerializer(serializers.ModelSerializer):
-    product_count = serializers.IntegerField()
+    product_count = serializers.IntegerField(read_only=True)
     
     class Meta:
         model = Collection
