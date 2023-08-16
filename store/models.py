@@ -50,5 +50,14 @@ class CartItem(models.Model):
     def __str__(self) -> str:
         return f'Cart belong to {self.cart.id}'
     
+    
+class Order(models.Model):
+    # create model for orders
+    pass
+    
+    
+class OrdterItem(models.Model):
+    pass
+    
   
     
