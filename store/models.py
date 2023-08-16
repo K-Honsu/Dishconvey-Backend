@@ -6,7 +6,7 @@ import uuid
 class Customer(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=11)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=1000)
     
     def __str__(self) -> str:
