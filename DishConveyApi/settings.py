@@ -153,7 +153,7 @@ AUTH_USER_MODEL = 'users.UserAccount'
 
 DJOSER = {
     # 'SEND_ACTIVATION_EMAIL': True,
-    'SEND_CONFIRMATION_EMAIL': True,
+    # 'SEND_CONFIRMATION_EMAIL': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     # 'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
     # 'ACTIVATION_URL': 'http://127.0.0.1:8000/activate/{uid}/{token}', #change to Frontend url
@@ -161,7 +161,7 @@ DJOSER = {
     'LOGOUT_ON_PASSWORD_CHANGE': True,
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserCreateSerializer',
-        'current_create': 'users.serializers.UserSerializer',
+        'current_user': 'users.serializers.UserSerializer',
         
     }
 }
