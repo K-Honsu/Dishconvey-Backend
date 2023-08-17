@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator
+from .enums import PaymentStatus
 import uuid
 
 class Customer(models.Model):
@@ -53,11 +54,22 @@ class CartItem(models.Model):
     
 class Order(models.Model):
     # create model for orders
-    pass
+    placed_at = models.DateTimeField(auto_now_add=True)
+    payment_status = models.CharField(choices=[(status.value, status.name) for status in PaymentStatus], default=PaymentStatus.PENDING)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    
+    def __str__(self) -> str:
+        return f'{self.customer} has placed an order at {self.placed_at} time and payment status is ->{self.payment_status}'
     
     
-class OrdterItem(models.Model):
-    pass
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='orderitems')
+    quantity = models.PositiveSmallIntegerField()
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
+    
+    def __str__(self) -> str:
+        return f'OrderItem is {self.product} -> {self.order}'
     
   
     
