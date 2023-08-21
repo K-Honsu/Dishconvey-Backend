@@ -94,7 +94,6 @@ class CartItemViewSet(ModelViewSet):
     
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
-    # serializer_class = OrderSerializer
     
     def create(self, request, *args, **kwargs):
         serializer = CreateOrderSerializer(

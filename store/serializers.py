@@ -9,7 +9,6 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = ['id', 'user_id','phone_number', 'date_of_birth', 'address']
 
 
-
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -21,7 +20,7 @@ class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collection
         fields = ['id', 'title', 'product_count']
-        
+             
 # cart serializers
 
 class SimpleProductSerializer(serializers.ModelSerializer):
