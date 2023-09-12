@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'users',
+    'rest_framework.authtoken',
     'store',
     'drf_yasg',
 ]
@@ -85,22 +86,22 @@ WSGI_APPLICATION = 'DishConveyApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DB_NAME'),
-#         'USER':config('DB_USER'),
-#         'PASSWORD':config('DB_PASSWORD'),
-#         'HOST':config('DB_HOST'),
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER':config('DB_USER'),
+        'PASSWORD':config('DB_PASSWORD'),
+        'HOST':config('DB_HOST'),
     }
 }
-database_url = os.environ.get('DATABASE_URL')
-DATABASES['default'] = dj_database_url.parse(config('DATABASE_URL'))
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#     }
+# }
+# database_url = os.environ.get('DATABASE_URL')
+# DATABASES['default'] = dj_database_url.parse(config('DATABASE_URL'))
 
 
 # Password validation
@@ -169,12 +170,13 @@ DJOSER = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'COERCE_DECIMAL_TO_STRING': False,
 }
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
-   "ACCESS_TOKEN_LIFETIME": timedelta(days=2),
+   "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
 }
 
