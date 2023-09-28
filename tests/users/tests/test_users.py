@@ -43,4 +43,17 @@ def test_user_flow(client):
     assert 'email' in response.data
     assert response.data['email'] == 'money@gmail.com'
     
+    
+     # log out
+    response = client.post(reverse('logout'), HTTP_AUTHORIZATION= f"JWT {token}", follow=True)
+    assert response.status_code == status.HTTP_204_NO_CONTENT
+    
+    # attempt to access after logoutN
+    headers = {'Authorization': f"JWT {token}"}
+    response = client.get('/auth/users/me', HTTP_AUTHORIZATION= f"JWT {token}", follow=True)
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
+    assert 'detail' in response.data
+    assert response.data['detail'] == 'Invalid Token'
+    
+    
    
